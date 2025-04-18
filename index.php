@@ -100,39 +100,48 @@
 
 
         <!-- About Section -->
-        <section class="py-5 bg-white paper-cut-effect">
-            <div class="container">
-                <div class="row align-items-center">
+        <section style="background-color: #e3f2fd;" id="about">
+            <div class="py-5 bg-dark paper-cut-effect">
+                <!-- Heading aligned to right -->
+                <div
+                    class="container py-md-3 mt-5 mt-md-1 h1 orbitron-simple fw-bold w-100 d-flex justify-content-md-end justify-content-center align-items-center px-md-5 text-center text-md-end text-white">
+                    About
+                </div>
 
-                    <!-- Left: Text -->
-                    <div class="col-md-6">
-                        <h2 class="fw-bold text-primary mb-3">We Understand Your Business</h2>
+                <div class="container">
+                    <div class="row align-items-center">
 
-                        <p class="text-muted fs-5">
-                            We have developed this website builder powered by AI, crafted to save your time, effort, and
-                            cost while launching your business online.
-                        </p>
+                        <!-- Left: Text -->
+                        <div class="col-md-6 mb-4 mb-md-0 text-white">
+                            <h2 class="fw-bold text-white mb-3 orbitron-simple">We Understand Your Business</h2>
 
-                        <p class="text-muted fs-5">
-                            Whether you're running a small shop or a large company, our AI-based builder helps you
-                            create beautiful, functional websites — no coding required.
-                        </p>
+                            <p class="fs-5">
+                                We have developed this website builder powered by AI, crafted to save your time, effort,
+                                and cost while launching your business online.
+                            </p>
 
-                        <p class="text-muted fs-5">
-                            We value every business and its unique identity. Our tool is built for everyone — small,
-                            medium, or large enterprises seeking a professional online presence.
-                        </p>
+                            <p class="fs-5">
+                                Whether you're running a small shop or a large company, our AI-based builder helps you
+                                create beautiful, functional websites — no coding required.
+                            </p>
+
+                            <p class="fs-5">
+                                We value every business and its unique identity. Our tool is built for everyone — small,
+                                medium, or large enterprises seeking a professional online presence.
+                            </p>
+                        </div>
+
+                        <!-- Right: Image -->
+                        <div class="col-md-6 text-center">
+                            <img src="assets/images/resume.png" alt="AI Website Builder Demo"
+                                class="img-fluid rounded shadow" style="max-height: 400px;">
+                        </div>
+
                     </div>
-
-                    <!-- Right: Image -->
-                    <div class="col-md-6">
-                        <img src="assets/images/resume.png" alt="AI Website Builder Demo"
-                            class="img-fluid rounded shadow">
-                    </div>
-
                 </div>
             </div>
         </section>
+
 
 
 

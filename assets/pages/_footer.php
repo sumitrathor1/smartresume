@@ -1,4 +1,4 @@
-<footer class="py-5" style="background-color: #e3f2fd;">
+<footer class="py-5" style="background-color: #e3f2fd;" id="contact">
     <div class="container">
         <div class="row">
 

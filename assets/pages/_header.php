@@ -16,17 +16,17 @@
                     <a class="nav-link fw-semibold text-dark" href="#services">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold text-dark" href="#">About</a>
+                    <a class="nav-link fw-semibold text-dark" href="#about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold text-dark" href="#">Contact</a>
+                    <a class="nav-link fw-semibold text-dark" href="#contact">Contact</a>
                 </li>
             </ul>
 
             <!-- Login Button on Right -->
             <div class="d-flex gap-3">
-                <a href="#" class="btn btn-outline-dark">Sign In</a>
-                <a href="#" class="btn btn-dark">Sign Up</a>
+                <a href="./login.php" class="btn btn-outline-dark">Sign In</a>
+                <a href="./signup.php" class="btn btn-dark">Sign Up</a>
             </div>
         </div>
     </div>
