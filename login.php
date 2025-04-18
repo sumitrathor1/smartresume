@@ -1,3 +1,8 @@
+<?php
+session_start();
+$successMsg = $_SESSION['success'] ?? '';
+unset($_SESSION['success']); // clear it after showing
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +18,7 @@
 
     <!-- Navbar -->
     <?php include "./assets/pages/_header.php" ?>
-
+    <div id="liveAlertPlaceholder" class="position-fixed top-0 end-0 p-3" style="z-index: 9999;"></div>
     <!-- Login Section -->
     <section class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
         <div class="card shadow p-4"
@@ -47,8 +52,33 @@
     </section>
 
     <?php include "./assets/pages/_footer.php" ?>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function showLiveAlert(message, type = "success") {
+        const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = `
+    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  `;
+
+        alertPlaceholder.append(wrapper);
+
+        setTimeout(() => {
+            const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
+            alert.close();
+        }, 4000);
+    }
+
+    // Show message if exists (injected from PHP)
+    <?php if (!empty($successMsg)) : ?>
+    showLiveAlert("<?= htmlspecialchars($successMsg) ?>", "success");
+    <?php endif; ?>
+    </script>
+
 </body>
 
 </html>
