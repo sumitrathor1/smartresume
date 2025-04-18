@@ -1,7 +1,36 @@
-@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400..900&family=Playwrite+MX+Guides&display=swap');
-.edu-au-vic-wa-nt-arrows-main{
-    font-family: "Edu AU VIC WA NT Arrows", cursive;
+@import url('https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Lobster+Two&family=Orbitron:wght@400..900&family=Playwrite+MX+Guides&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.lobster-two-regular {
+    font-family: "Lobster Two", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .paper-cut-effect{
+    clip-path: polygon(61% 12%, 66% 0, 100% 0, 100% 100%, 0 100%, 0 13%);
+}
+  
+  .orbitron-simple {
+    font-family: "Orbitron", sans-serif;
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
-}
+  }
+
+  @media (max-width: 768px) {
+    .paper-cut-effect .section-headings {
+      margin-bottom: 2rem;
+    }
+  }
+  @media (max-width: 990px) {
+    .paper-cut-effect {
+        clip-path: polygon(0% 0%, 0% 0, 100% 0, 100% 100%, 0 100%, 0 13%);
+
+    }
+  }
+  

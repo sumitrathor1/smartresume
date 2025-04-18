@@ -13,7 +13,7 @@
                     <a class="nav-link fw-semibold text-dark" href="./">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold text-dark" href="#">Features</a>
+                    <a class="nav-link fw-semibold text-dark" href="#services">Services</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link fw-semibold text-dark" href="#">About</a>
