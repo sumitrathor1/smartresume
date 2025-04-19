@@ -26,7 +26,7 @@ unset($_SESSION['success_msg']); // clear it after showing
 
             <h2 class=" text-center mb-4 fw-bold">Login</h2>
 
-            <form>
+            <form id="login-form">
                 <!-- Email Field -->
                 <div class="mb-3">
                     <label for="email" class="form-label fw-semibold">Email address</label>
@@ -52,6 +52,7 @@ unset($_SESSION['success_msg']); // clear it after showing
     </section>
 
     <?php include "./assets/pages/_footer.php" ?>
+    <script src="./assets/js/login.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -60,11 +61,11 @@ unset($_SESSION['success_msg']); // clear it after showing
 
             const wrapper = document.createElement("div");
             wrapper.innerHTML = `
-    <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-      ${message}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  `;
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                `;
 
             alertPlaceholder.append(wrapper);
 
