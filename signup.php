@@ -75,7 +75,7 @@ unset($_SESSION['msg']);
 
         <?php if (!empty($msg)) : ?>
         setTimeout(() => {
-            showLiveAlert("<?= htmlspecialchars($msg) ?>", "success");
+            showLiveAlert("<?= htmlspecialchars($msg) ?>", "warning");
         }, 100);
         <?php endif; ?>
     });

@@ -1,7 +1,7 @@
 <?php
 session_start();
-$successMsg = $_SESSION['success'] ?? '';
-unset($_SESSION['success']); // clear it after showing
+$successMsg = $_SESSION['success_msg'] ?? '';
+unset($_SESSION['success_msg']); // clear it after showing
 ?>
 <!DOCTYPE html>
 <html lang="en">
