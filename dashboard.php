@@ -20,6 +20,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/dashboard_main.css">
 </head>
 
@@ -36,12 +37,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
                     <p class="text-muted">Ready to build your next resume?</p>
                 </div>
                 <div class="col-md-4 text-md-end">
-                    <div class="card shadow-sm border-success">
+                    <div class="card shadow-sm border-success" style="background-color: #e3f2fd;">
                         <div class="card-body">
                             <h5 class="card-title mb-2">Your Credits</h5>
-                            <h3 class="text-success fw-bold">
-                                <?php echo $_SESSION['credits'] ?? 0; ?>
-                            </h3>
+                            <h3 class="text-success fw-bold" id="credits-box">Loading...</h3>
                             <a href="buy-credits.php" class="btn btn-outline-success btn-sm mt-2">Buy More</a>
                         </div>
                     </div>
@@ -55,7 +54,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
             </div>
 
             <!-- List of Resumes -->
-            <div class="row">
+            <div class="row" id="yourResumes">
                 <!-- This section will loop through resumes -->
                 <?php
         // Example loop - replace with actual DB data
@@ -67,7 +66,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         if (!empty($resumes)) {
             foreach ($resumes as $resume) : ?>
                 <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm" style="background-color: #e3f2fd;">
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($resume['title']); ?></h5>
                             <p class="card-text text-muted">Created: <?php echo $resume['created']; ?></p>
@@ -86,6 +85,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
     </main>
     <?php include "./assets/pages/_dashboard-footer.php"?>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
     </script>
@@ -115,6 +118,40 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         <?php endif; ?>
     })
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch user credits using AJAX
+        function fetchCredits() {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", "./assets/pages/api/_get-credits.php", true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        const res = JSON.parse(xhr.responseText);
+                        if (res.success) {
+                            document.getElementById("credits-box").textContent = res.credits;
+                        } else {
+                            document.getElementById("credits-box").textContent = "0";
+                            console.log(xhr.responseText)
+                        }
+                    } catch (e) {
+                        document.getElementById("credits-box").textContent = "Err";
+                    }
+                } else {
+                    document.getElementById("credits-box").textContent = "Err";
+                }
+            };
+
+            xhr.send();
+        }
+        fetchCredits();
+
+
+    });
+    </script>
+
 </body>
 
 </html>
