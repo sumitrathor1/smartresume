@@ -56,30 +56,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
             <!-- List of Resumes -->
             <div class="row" id="yourResumes">
                 <!-- This section will loop through resumes -->
-                <?php
-        // Example loop - replace with actual DB data
-        $resumes = [
-            ["title" => "Frontend Resume", "created" => "2024-11-01"],
-            ["title" => "Backend Developer CV", "created" => "2024-12-10"]
-        ];
-
-        if (!empty($resumes)) {
-            foreach ($resumes as $resume) : ?>
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm" style="background-color: #e3f2fd;">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($resume['title']); ?></h5>
-                            <p class="card-text text-muted">Created: <?php echo $resume['created']; ?></p>
-                            <a href="#" class="btn btn-sm btn-outline-primary">View</a>
-                            <a href="#" class="btn btn-sm btn-outline-secondary">Edit</a>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach;
-        } else {
-            echo "<p class='text-muted'>You haven't created any resumes yet.</p>";
-        }
-        ?>
             </div>
         </div>
 
@@ -92,6 +68,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous">
     </script>
+    <script src="assets/js/dashboard.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         function showLiveAlert(message, type = "success") {
@@ -118,40 +95,6 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         <?php endif; ?>
     })
     </script>
-
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Fetch user credits using AJAX
-        function fetchCredits() {
-            const xhr = new XMLHttpRequest();
-            xhr.open("GET", "./assets/pages/api/_get-credits.php", true);
-
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    try {
-                        const res = JSON.parse(xhr.responseText);
-                        if (res.success) {
-                            document.getElementById("credits-box").textContent = res.credits;
-                        } else {
-                            document.getElementById("credits-box").textContent = "0";
-                            console.log(xhr.responseText)
-                        }
-                    } catch (e) {
-                        document.getElementById("credits-box").textContent = "Err";
-                    }
-                } else {
-                    document.getElementById("credits-box").textContent = "Err";
-                }
-            };
-
-            xhr.send();
-        }
-        fetchCredits();
-
-
-    });
-    </script>
-
 </body>
 
 </html>

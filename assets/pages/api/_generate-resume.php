@@ -1,102 +1,54 @@
 <?php
-session_start();
-header('Content-Type: application/json');
+$prompt = "Generate a professional resume content with these details:\n";
+$prompt .= "Full Name: $fullName\n";
+$prompt .= "Job Title: $jobTitle\n";
+$prompt .= "Email: $email\n";
+$prompt .= "Phone: $phone\n";
+$prompt .= "Skills: $skills\n";
+$prompt .= "Experience: $experience\n";
+$prompt .= "Education: $education\n";
+$prompt .= "Write it in a clean and formal tone suitable for a resume.";
 
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Unauthorized. Please login."
-    ]);
+// GEMINI AI API CALL
+$apiKey = "AIzaSyCDn3c2o0biaYqyG--8JDrdaBmrH5kyXfU"; // Your actual key
+$url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=$apiKey";
+
+$payload = [
+    "contents" => [
+        [
+            "parts" => [
+                ["text" => $prompt]
+            ]
+        ]
+    ]
+];
+
+$headers = ["Content-Type: application/json"];
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // for local testing
+
+$response = curl_exec($ch);
+
+if (curl_errno($ch)) {
+    echo json_encode(["status" => "error", "message" => "AI Request Failed: " . curl_error($ch)]);
     exit;
 }
 
-require_once '../db.php';
+curl_close($ch);
 
-$userId = $_SESSION['user_id'];
+$aiResult = json_decode($response, true);
 
-// 1. Get user credit
-$stmt = $conn->prepare("SELECT credits FROM users WHERE id = ?");
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
-
-if (!$user) {
-    echo json_encode(["status" => "error", "message" => "User not found."]);
+if (!isset($aiResult['candidates'][0]['content']['parts'][0]['text'])) {
+    echo json_encode(["status" => "error", "message" => "AI did not return content."]);
     exit;
 }
 
-if ($user['credits'] < 10) {
-    echo json_encode(["status" => "error", "message" => "Not enough credits. Please purchase more."]);
-    exit;
-}
+$aiGeneratedText = $aiResult['candidates'][0]['content']['parts'][0]['text'];
 
-// 2. Process resume data
-$templateId = $_POST['template_id'] ?? 1;
-$fullName = $_POST['full_name'] ?? '';
-$jobTitle = $_POST['job_title'] ?? '';
-$email = $_POST['email'] ?? '';
-$phone = $_POST['phone'] ?? '';
-$skills = $_POST['skills'] ?? '';
-$experience = $_POST['experience'] ?? '';
-$education = $_POST['education'] ?? '';
 
-// 3. Save image file
-$imgPath = '';
-if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] === UPLOAD_ERR_OK) {
-    $ext = pathinfo($_FILES['profile_picture']['name'], PATHINFO_EXTENSION);
-    $imgName = 'profile_' . uniqid() . '.' . $ext;
-    $uploadPath = '../../uploads/' . $imgName;
-    move_uploaded_file($_FILES['profile_picture']['tmp_name'], $uploadPath);
-    $imgPath = 'uploads/' . $imgName; // For use in HTML
-}
-
-// 4. Deduct 10 credits
-$update = $conn->prepare("UPDATE users SET credits = credits - 10 WHERE id = ?");
-$update->bind_param("i", $userId);
-$update->execute();
-
-// 5. (Later) Save resume into DB
-
-// 6. Return resume HTML based on template
-ob_start(); // Start output buffering
 ?>
-
-<div class="card shadow p-4" style="background-color: #f8f9fa;">
-    <div class="row">
-        <div class="col-md-4 text-center">
-            <img src="<?= $imgPath ?>" class="img-fluid rounded-circle mb-3" style="max-height: 200px;">
-            <h4><?= htmlspecialchars($fullName) ?></h4>
-            <p class="text-muted"><?= htmlspecialchars($jobTitle) ?></p>
-            <p><strong>Email:</strong> <?= htmlspecialchars($email) ?></p>
-            <p><strong>Phone:</strong> <?= htmlspecialchars($phone) ?></p>
-            <p><strong>Skills:</strong> <?= htmlspecialchars($skills) ?></p>
-        </div>
-        <div class="col-md-8">
-            <h5>Experience</h5>
-            <p><?= nl2br(htmlspecialchars($experience)) ?></p>
-            <hr>
-            <h5>Education</h5>
-            <p><?= nl2br(htmlspecialchars($education)) ?></p>
-
-            <div class="text-end mt-4">
-                <button class="btn btn-success" onclick="downloadPDF()">Download PDF</button>
-                <button class="btn btn-secondary" onclick="editResume()">Edit</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-function downloadPDF() {
-    alert('TODO: Generate and download PDF');
-}
-
-function editResume() {
-    alert('TODO: Allow editing the resume');
-}
-</script>
-
-<?php
-$html = ob_get_clean(); // Capture the buffer
-echo json_encode(["status" => "success", "html" => $html]);
