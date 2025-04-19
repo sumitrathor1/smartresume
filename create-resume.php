@@ -27,7 +27,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <!-- Template 1 -->
             <div class="col">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow-sm" style="background-color: #e3f2fd;">
                     <img src="assets/images/templates/template1.png" class="card-img-top" alt="Template 1">
                     <div class="card-body">
                         <h5 class="card-title">Modern Professional</h5>
@@ -39,7 +39,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
             <!-- Template 2 -->
             <div class="col">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow-sm" style="background-color: #e3f2fd;">
                     <img src="assets/images/templates/template2.png" class="card-img-top" alt="Template 2">
                     <div class="card-body">
                         <h5 class="card-title">Creative Bold</h5>
@@ -51,7 +51,7 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_email'])) {
 
             <!-- Template 3 -->
             <div class="col">
-                <div class="card h-100 shadow-sm">
+                <div class="card h-100 shadow-sm" style="background-color: #e3f2fd;">
                     <img src="assets/images/templates/template3.png" class="card-img-top" alt="Template 3">
                     <div class="card-body">
                         <h5 class="card-title">Minimal Elegant</h5>
