@@ -15,7 +15,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="resumes.php">Your Resumes</a>
+                    <a class="nav-link" href="#yourResumes">Your Resumes</a>
                 </li>
 
                 <li class="nav-item">
