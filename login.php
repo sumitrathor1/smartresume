@@ -2,6 +2,14 @@
 session_start();
 $successMsg = $_SESSION['success_msg'] ?? '';
 unset($_SESSION['success_msg']); // clear it after showing
+
+$msg = $_SESSION['msg'] ?? '';
+unset($_SESSION['msg']); // clear it after showing
+
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_email'])) {
+    header("Location: dashboard.php");
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,6 +86,10 @@ unset($_SESSION['success_msg']); // clear it after showing
         // Show message if exists (injected from PHP)
         <?php if (!empty($successMsg)) : ?>
         showLiveAlert("<?=htmlspecialchars($successMsg) ?>", "success");
+        <?php endif; ?>
+
+        <?php if (!empty($msg)) : ?>
+        showLiveAlert("<?=htmlspecialchars($msg) ?>", "danger");
         <?php endif; ?>
     })
     </script>
