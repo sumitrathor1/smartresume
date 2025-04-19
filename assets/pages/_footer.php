@@ -19,10 +19,10 @@
                 <h5 class="fw-semibold">Important Links</h5>
                 <ul class="list-unstyled">
                     <li class="mb-2"><a href="./" class="text-dark text-decoration-none">Home</a></li>
-                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none">Features</a></li>
-                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none">About</a></li>
-                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none">Contact</a></li>
-                    <li class="mb-2"><a href="#" class="text-dark text-decoration-none">Privacy Policy</a></li>
+                    <li class="mb-2"><a href="#services" class="text-dark text-decoration-none">Services</a></li>
+                    <li class="mb-2"><a href="#about" class="text-dark text-decoration-none">About</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-dark text-decoration-none">Contact</a></li>
+
                 </ul>
             </div>
 

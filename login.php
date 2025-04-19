@@ -54,29 +54,31 @@ unset($_SESSION['success']); // clear it after showing
     <?php include "./assets/pages/_footer.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    function showLiveAlert(message, type = "success") {
-        const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+    document.addEventListener("DOMContentLoaded", function() {
+        function showLiveAlert(message, type = "success") {
+            const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
 
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = `
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = `
     <div class="alert alert-${type} alert-dismissible fade show" role="alert">
       ${message}
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   `;
 
-        alertPlaceholder.append(wrapper);
+            alertPlaceholder.append(wrapper);
 
-        setTimeout(() => {
-            const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
-            alert.close();
-        }, 4000);
-    }
+            setTimeout(() => {
+                const alert = bootstrap.Alert.getOrCreateInstance(wrapper.querySelector('.alert'));
+                alert.close();
+            }, 4000);
+        }
 
-    // Show message if exists (injected from PHP)
-    <?php if (!empty($successMsg)) : ?>
-    showLiveAlert("<?= htmlspecialchars($successMsg) ?>", "success");
-    <?php endif; ?>
+        // Show message if exists (injected from PHP)
+        <?php if (!empty($successMsg)) : ?>
+        showLiveAlert("<?=htmlspecialchars($successMsg) ?>", "success");
+        <?php endif; ?>
+    })
     </script>
 
 </body>
