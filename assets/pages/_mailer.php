@@ -16,15 +16,15 @@ function sendVerificationEmail($toEmail, $toName, $verificationLink) {
         $mail->isSMTP();
         $mail->Host = 'smtp.gmail.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'sumitrathor142272@gmail.com';
-        $mail->Password = 'yshvzymtglrghowg';
+        $mail->Username = 'YOUR_EMAIL';
+        $mail->Password = 'YOUR_API_KEY';
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
       
-        $mail->setFrom("sumitrathor142272@gmail.com");
+        $mail->setFrom("YOUR_EMAIL");
 
         // Recipients
-        $mail->setFrom('sumitrathor142272@gmail.com', 'SmartResume (No Reply)');
+        $mail->setFrom('YOUR_MAIL', 'SmartResume (No Reply)');
         $mail->addAddress($toEmail, $toName);
 
         // Content
