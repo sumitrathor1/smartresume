@@ -14,7 +14,7 @@ echo json_encode([
 exit;
 
 // ✅ API Key
-$apiKey = "AIzaSyCDn3c2o0biaYqyG--8JDrdaBmrH5kyXfU";
+$apiKey = "YOUR_API_KEY";
 
 // ✅ Get POST Data
 $template_id = $_POST['template_id'];
